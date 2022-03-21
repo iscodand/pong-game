@@ -63,8 +63,8 @@ pygame.display.set_caption('Pong Game')
 
 # Defining Objects (Rectangles)
 ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 20, 20)
-player = pygame.Rect(10, screen_height/2 - 70, 5, 150)
-opponent = pygame.Rect(screen_width - 15, screen_height/2 - 70, 5, 150)
+player = pygame.Rect(10, screen_height/2 - 70, 6, 150)
+opponent = pygame.Rect(screen_width - 15, screen_height/2 - 70, 6, 150)
 
 # Defining Colors
 bg_color = pygame.Color('black')
