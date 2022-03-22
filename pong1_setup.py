@@ -68,13 +68,13 @@ pygame.display.set_caption('Pong Game')
 
 # Defining Objects (Rectangles)
 ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 20, 20)
-player = pygame.Rect(10, screen_height/2 - 70, 6, 150)
-opponent = pygame.Rect(screen_width - 15, screen_height/2 - 70, 6, 150)
+player = pygame.Rect(10, screen_height/2 - 70, 6, 130)
+opponent = pygame.Rect(screen_width - 15, screen_height/2 - 70, 6, 130)
 
 # Defining Colors
 bg_color = pygame.Color('black')
 light_grey = (200, 200, 200)
-blue = (0, 139, 0)
+green = (0, 139, 0)
 red = (139, 0, 0)
 
 # Defining Speed of Ball
@@ -99,26 +99,26 @@ while True:
         # Defining player movement
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
-                player_speed += 7
+                player_speed += 8
             if event.key == pygame.K_w:
-                player_speed += -7
+                player_speed += -8
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_s:
-                player_speed += -7
+                player_speed += -8
             if event.key == pygame.K_w:
-                player_speed += 7
+                player_speed += 8
 
         # Defining opponent movement
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                opponent_speed += 7
+                opponent_speed += 8
             if event.key == pygame.K_UP:
-                opponent_speed += -7
+                opponent_speed += -8
         if event.type == pygame.KEYUP:
             if event.key == pygame.K_DOWN:
-                opponent_speed += -7
+                opponent_speed += -8
             if event.key == pygame.K_UP:
-                opponent_speed += 7
+                opponent_speed += 8
 
     # Functions
     ball_animation()
@@ -127,11 +127,12 @@ while True:
 
     # Defining object colors
     screen.fill(bg_color)
-    pygame.draw.rect(screen, blue, player)
+    pygame.draw.rect(screen, green, player)
     pygame.draw.rect(screen, red, opponent)
     pygame.draw.ellipse(screen, light_grey, ball)
     pygame.draw.aaline(screen, light_grey, (screen_width/2,
                        0), (screen_width/2, screen_height))
+    pygame.draw.circle(screen, light_grey, (screen_width/2, screen_height/2), 60, 1)
 
     player_text = game_font.render(f"{player_score}", False, light_grey)
     screen.blit(player_text, (630, 35))
