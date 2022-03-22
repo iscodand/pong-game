@@ -4,8 +4,7 @@ import random
 
 
 def ball_animation():
-    # Fixing Bugs
-    global ball_speed_x, ball_speed_y
+    global ball_speed_x, ball_speed_y, player_score, opponent_score
 
     # Defining the movement of the ball
     ball.x += ball_speed_x
@@ -14,7 +13,13 @@ def ball_animation():
     # Defining the limitations of ball in screen
     if ball.top <= 0 or ball.bottom >= screen_height:
         ball_speed_y *= -1
-    if ball.left <= 0 or ball.left >= screen_width:
+
+    if ball.left <= 0:
+        player_score += 1
+        ball_start()
+
+    if ball.left >= screen_width:
+        opponent_score += 1
         ball_start()
 
     # Defining the colisions with the player and opponent
@@ -73,8 +78,8 @@ blue = (0, 139, 0)
 red = (139, 0, 0)
 
 # Defining Speed of Ball
-ball_speed_x = 7 * random.choice((1, -1))
-ball_speed_y = 7 * random.choice((1, -1))
+ball_speed_x = 11 * random.choice((1, -1))
+ball_speed_y = 11 * random.choice((1, -1))
 
 # Defining Speed of Player
 player_speed = 0
