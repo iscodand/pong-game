@@ -61,7 +61,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Setting main window
-screen_width = 1200
+screen_width = 1300
 screen_height = 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Pong Game')
@@ -132,12 +132,13 @@ while True:
     pygame.draw.ellipse(screen, light_grey, ball)
     pygame.draw.aaline(screen, light_grey, (screen_width/2,
                        0), (screen_width/2, screen_height))
-    pygame.draw.circle(screen, light_grey, (screen_width/2, screen_height/2), 60, 1)
+    pygame.draw.circle(screen, light_grey,
+                       (screen_width/2, screen_height/2), 80, 1)
 
     player_text = game_font.render(f"{player_score}", False, light_grey)
-    screen.blit(player_text, (630, 35))
+    screen.blit(player_text, (690, 35))
     opponent_text = game_font.render(f"{opponent_score}", False, light_grey)
-    screen.blit(opponent_text, (560, 35))
+    screen.blit(opponent_text, (595, 35))
 
     # Defining FPS
     pygame.display.flip()
