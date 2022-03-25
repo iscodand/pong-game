@@ -12,19 +12,37 @@ def ball_animation():
 
     # Defining the limitations of ball in screen
     if ball.top <= 0 or ball.bottom >= screen_height:
+        pygame.mixer.Sound.play(pong_sound)
         ball_speed_y *= -1
 
     if ball.left <= 0:
+        pygame.mixer.Sound.play(score_sound)
         player_score += 1
         score_time = pygame.time.get_ticks()
 
     if ball.left >= screen_width:
+        pygame.mixer.Sound.play(score_sound)
         opponent_score += 1
         score_time = pygame.time.get_ticks()
 
     # Defining the colisions with the player and opponent
-    if ball.colliderect(player) or ball.colliderect(opponent):
-        ball_speed_x *= -1
+    if ball.colliderect(opponent) and ball_speed_x > 0:
+        pygame.mixer.Sound.play(pong_sound)
+        if abs(ball.right - opponent.left) < 10:
+            ball_speed_x *= -1
+        elif abs(ball.bottom - opponent.top) < 10 and ball_speed_y > 0:
+            ball_speed_y *= -1
+        elif abs(ball.top - opponent.bottom) < 10 and ball_speed_y < 0:
+            ball_speed_y *= -1
+
+    if ball.colliderect(player) and ball_speed_x < 0:
+        pygame.mixer.Sound.play(pong_sound)
+        if abs(ball.left - player.right) < 10:
+            ball_speed_x *= -1
+        elif abs(ball.bottom - player.top) < 10 and ball_speed_y > 0:
+            ball_speed_y *= -1
+        elif abs(ball.top - player.bottom) < 10 and ball_speed_y < 0:
+            ball_speed_y *= -1
 
 # Defining the limitations of 1° player
 
@@ -112,6 +130,10 @@ game_font = pygame.font.Font("freesansbold.ttf", 20)
 
 # Defining score time
 score_time = True
+
+# Sounds
+pong_sound = pygame.mixer.Sound("Sounds\pong.wav")
+score_sound = pygame.mixer.Sound("Sounds\score.wav")
 
 while True:
     for event in pygame.event.get():
