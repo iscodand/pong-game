@@ -75,15 +75,15 @@ def ball_start():
 
     if current_time - score_time < 700:
         number_three = game_font.render("3", False, light_grey)
-        screen.blit(number_three, (screen_width/2 - 5, 65))
+        screen.blit(number_three, (screen_width/2 - 5, 70))
 
     if 700 < current_time - score_time < 1400:
         number_two = game_font.render("2", False, light_grey)
-        screen.blit(number_two, (screen_width/2 - 5, 65))
+        screen.blit(number_two, (screen_width/2 - 5, 70))
 
     if 1400 < current_time - score_time < 2100:
         number_one = game_font.render("1", False, light_grey)
-        screen.blit(number_one, (screen_width/2 - 5, 65))
+        screen.blit(number_one, (screen_width/2 - 5, 70))
 
     if current_time - score_time < 2100:
         ball_speed_x, ball_speed_y = 0, 0
@@ -127,6 +127,7 @@ opponent_speed = 0
 player_score = 0
 opponent_score = 0
 game_font = pygame.font.Font("freesansbold.ttf", 20)
+player_font = pygame.font.Font("freesansbold.ttf", 12)
 
 # Defining score time
 score_time = True
@@ -183,10 +184,20 @@ while True:
     if score_time:
         ball_start()
 
-    player_text = game_font.render(f"{player_score}", False, light_grey)
-    screen.blit(player_text, (695, 35))
-    opponent_text = game_font.render(f"{opponent_score}", False, light_grey)
-    screen.blit(opponent_text, (590, 35))
+    # Defining player and opponent points // Defining details
+
+    player_text = game_font.render(f"{player_score}", False, red)
+    screen.blit(player_text, (695, 40))
+    player_one = player_font.render("P2", False, red)
+    screen.blit(player_one, (690, 15))
+
+    equal = game_font.render(f":", False, light_grey)
+    screen.blit(equal, (screen_width/2 - 5, 40))
+
+    opponent_text = game_font.render(f"{opponent_score}", False, green)
+    screen.blit(opponent_text, (590, 40))
+    player_two = player_font.render("P1", False, green)
+    screen.blit(player_two, (585, 15))
 
     # Defining FPS
     pygame.display.flip()
