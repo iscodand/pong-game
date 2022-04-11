@@ -3,6 +3,49 @@ import sys
 import random
 
 
+def pause():
+    paused = True
+    while paused:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_c:
+                    paused = False
+                elif event.key == pygame.K_q:
+                    pygame.quit()
+                    quit()
+
+        screen.fill(pygame.Color('black'))
+
+        pong_game = game_font.render(f"Pong Game", False, green)
+        pong_game_rect = pong_game.get_rect(center=(screen_width/2, 50))
+        screen.blit(pong_game, pong_game_rect)
+
+        pause_text = pause_font.render(f"GAME PAUSED", False, white)
+        pause_text_rect = pause_text.get_rect(center=(screen_width/2, 250))
+        screen.blit(pause_text, pause_text_rect)
+
+        continue_text = game_font.render(
+            f"Press C to 'continue'", False, white)
+        continue_text_rect = continue_text.get_rect(
+            center=(screen_width/2, screen_height/2 + 50))
+        screen.blit(continue_text, continue_text_rect)
+
+        quit_text = game_font.render(f"Press Q to 'quit'", False, white)
+        quit_text_rect = quit_text.get_rect(center=(screen_width/2, screen_height/2 + 10))
+        screen.blit(quit_text, quit_text_rect)
+
+        license_isco = credits_font.render(
+            f"Powered by Isco D'Andrade", False, green)
+        license_isco_rect = license_isco.get_rect(center=(screen_width/2, 650))
+        screen.blit(license_isco, license_isco_rect)
+
+        pygame.display.update()
+        clock.tick(5)
+
+
 def ball_animation():
     global ball_speed_x, ball_speed_y, player_score, opponent_score, score_time
 
@@ -74,15 +117,15 @@ def ball_start():
     ball.center = (screen_width/2, screen_height/2)
 
     if current_time - score_time < 700:
-        number_three = game_font.render("3", False, light_grey)
+        number_three = game_font.render("3", False, white)
         screen.blit(number_three, (screen_width/2 - 5, 70))
 
     if 700 < current_time - score_time < 1400:
-        number_two = game_font.render("2", False, light_grey)
+        number_two = game_font.render("2", False, white)
         screen.blit(number_two, (screen_width/2 - 5, 70))
 
     if 1400 < current_time - score_time < 2100:
-        number_one = game_font.render("1", False, light_grey)
+        number_one = game_font.render("1", False, white)
         screen.blit(number_one, (screen_width/2 - 5, 70))
 
     if current_time - score_time < 2100:
@@ -98,26 +141,33 @@ def ball_start():
 pygame.init()
 clock = pygame.time.Clock()
 
-# Setting main window
+# Setting main windown
 screen_width = 1300
 screen_height = 700
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Pong Game')
+
+# Fonts
+game_font = pygame.font.Font('freesansbold.ttf', 20)
+player_font = pygame.font.Font('freesansbold.ttf', 12)
+
+pause_font = pygame.font.Font('freesansbold.ttf', 38)
+credits_font = pygame.font.Font('freesansbold.ttf', 12)
 
 # Defining Objects (Rectangles)
 ball = pygame.Rect(screen_width/2 - 15, screen_height/2 - 15, 20, 20)
 player = pygame.Rect(10, screen_height/2 - 70, 6, 130)
 opponent = pygame.Rect(screen_width - 15, screen_height/2 - 70, 6, 130)
 
-# Defining Colors
-bg_color = pygame.Color('black')
-light_grey = (200, 200, 200)
-green = (0, 139, 0)
-red = (139, 0, 0)
-
 # Defining Speed of Ball
 ball_speed_x = 11 * random.choice((1, -1))
 ball_speed_y = 11 * random.choice((1, -1))
+
+# Defining Colors
+bg_color = pygame.Color('black')
+white = pygame.Color('white')
+green = (0, 255, 128)
+red = (253, 77, 77)
 
 # Defining Speed of Player
 player_speed = 0
@@ -126,8 +176,6 @@ opponent_speed = 0
 # Defining Score
 player_score = 0
 opponent_score = 0
-game_font = pygame.font.Font("freesansbold.ttf", 20)
-player_font = pygame.font.Font("freesansbold.ttf", 12)
 
 # Defining score time
 score_time = True
@@ -166,6 +214,11 @@ while True:
             if event.key == pygame.K_UP:
                 opponent_speed += 8
 
+        # Defining pause keys
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_p:
+                pause()
+
     # Functions
     ball_animation()
     player_animation()
@@ -175,29 +228,24 @@ while True:
     screen.fill(bg_color)
     pygame.draw.rect(screen, green, player)
     pygame.draw.rect(screen, red, opponent)
-    pygame.draw.ellipse(screen, light_grey, ball)
-    pygame.draw.aaline(screen, light_grey, (screen_width/2, 100),
+    pygame.draw.ellipse(screen, white, ball)
+    pygame.draw.aaline(screen, white, (screen_width/2, 100),
                        (screen_width/2, screen_height))
-    pygame.draw.circle(screen, light_grey,
+    pygame.draw.circle(screen, white,
                        (screen_width/2, screen_height/2), 80, 1)
 
     if score_time:
         ball_start()
 
-    # Defining player and opponent points // Defining details
-
+    # Defining player and opponent points
     player_text = game_font.render(f"{player_score}", False, red)
-    screen.blit(player_text, (695, 40))
-    player_one = player_font.render("P2", False, red)
-    screen.blit(player_one, (690, 15))
+    screen.blit(player_text, (695, 30))
 
-    equal = game_font.render(f":", False, light_grey)
-    screen.blit(equal, (screen_width/2 - 5, 40))
+    equal = game_font.render(f":", False, white)
+    screen.blit(equal, (screen_width/2 - 5, 30))
 
     opponent_text = game_font.render(f"{opponent_score}", False, green)
-    screen.blit(opponent_text, (590, 40))
-    player_two = player_font.render("P1", False, green)
-    screen.blit(player_two, (585, 15))
+    screen.blit(opponent_text, (590, 30))
 
     # Defining FPS
     pygame.display.flip()
