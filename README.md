@@ -15,8 +15,7 @@ A simple Pong Game made with Pygame librarie.
 
 <h2>Controls</h2>
 
-1. PLAYER 1 = "W" to UP // "S" to DOWN
-2. PLAYER 2 = "ARROWUP" to UP // "ARROWDOWN" to DOWN
-
-SPACEBAR = PAUSE
-ESC = EXIT
+- PLAYER 1 = "W" to UP // "S" to DOWN
+- PLAYER 2 = "ARROWUP" to UP // "ARROWDOWN" to DOWN
+- SPACEBAR = PAUSE
+- ESC = EXIT
