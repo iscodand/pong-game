@@ -12,14 +12,13 @@ def start_menu():
                 quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    score_time
                     game()
                 elif event.key == pygame.K_q:
                     pygame.quit()
                     quit()
 
-        screen.fill(pygame.Color('black'))
-        
+        screen.fill(pygame.Color(24, 24, 24))
+
         pong_game = large_font.render(f"PONG GAME", False, white)
         pong_game_rect = pong_game.get_rect(center=(screen_width/2, 300))
         screen.blit(pong_game, pong_game_rect)
@@ -45,13 +44,13 @@ def pause():
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
+                if event.key == pygame.K_SPACE:
                     paused = False
-                elif event.key == pygame.K_q:
+                elif event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
 
-        screen.fill(pygame.Color('black'))
+        screen.fill(pygame.Color(24, 24, 24))
 
         pong_game = small_font.render(f"PONG GAME", False, white)
         pong_game_rect = pong_game.get_rect(center=(screen_width/2, 50))
@@ -62,12 +61,12 @@ def pause():
         screen.blit(pause_text, pause_text_rect)
 
         continue_text = medium_font.render(
-            f"PRESS C TO 'CONTINUE'", False, white)
+            f"PRESS SPACE TO 'CONTINUE'", False, white)
         continue_text_rect = continue_text.get_rect(
             center=(screen_width/2, screen_height/2 + 10))
         screen.blit(continue_text, continue_text_rect)
 
-        quit_text = medium_font.render(f"PRESS Q TO 'QUIT'", False, white)
+        quit_text = medium_font.render(f"PRESS ESC TO 'QUIT'", False, white)
         quit_text_rect = quit_text.get_rect(
             center=(screen_width/2, screen_height/2 + 50))
         screen.blit(quit_text, quit_text_rect)
@@ -257,7 +256,7 @@ def game():
 
             # Defining pause keys
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:
+                if event.key == pygame.K_SPACE:
                     pause()
 
         # Functions
@@ -291,5 +290,6 @@ def game():
         # Defining FPS
         pygame.display.flip()
         clock.tick(60)
+
 
 start_menu()
