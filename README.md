@@ -1,21 +1,34 @@
-# Pong Game - Python
+# Pong Game - Python / Pygame
 
-A simple Pong Game made with Pygame librarie.
+The famous 70's arcade game, Pong Game! The game was made entirely with Python, using the Pygame library.
 
-<h2>How to Play</h2>
+## How to Install
 
-1. Install or Clone the repository.
-2. You need install "Python 3".
-3. You also need install the ".requisites.txt" documents
+- Install or Clone the Repository.
+- Use the package manager [pip](https://pip.pype.io/en/stable/) in your Virtual Environment to install the requeriments.
 
-<h2>Installing Requeriments</h2>
+```bash
+pip install -r .requeriments.txt
+```
 
-1. Use "pip install -r .requeriments.txt" in your Python Virtual env
-2. Done this, just run and enjoy the game.
+## Controls
 
-<h2>Controls</h2>
+Player 1
+- W ---------------> Up
+- S ----------------> Down
 
-- PLAYER 1 = "W" to UP // "S" to DOWN
-- PLAYER 2 = "ARROWUP" to UP // "ARROWDOWN" to DOWN
-- SPACEBAR = PAUSE
-- ESC = EXIT
+Player 2
+- ARROWUP -----> Up
+- ARROWDOWN > Down
+
+Pause and Exit
+- ESC -------------> Exit
+- SPACEBAR ------> Pause
+
+## Contributing
+
+Pull requests are welcome, for major changes, please open a issue first to discuss whatyou would like to change.
+
+Please, make sure to update tests are appropriate.
+
+
